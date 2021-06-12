@@ -15,7 +15,7 @@ let fundSlider;
 let numSinesSlider;
 let ratioSlider;
 
-function setup() {
+window.setup = function() {
   createCanvas(100, 100);
   windowResized();
 
@@ -39,12 +39,12 @@ function setup() {
 
 }
 
-function windowResized() {
+window.windowResized = function() {
   resizeCanvas(windowWidth - 30, windowHeight - 40);
   rad = height / 4; // compute radius for central circle
 }
 
-function draw() {
+window.draw = function() {
 
   const fund = fundSlider.value() / 20000;
   const numSines = numSinesSlider.value();
@@ -75,7 +75,7 @@ function draw() {
     if (trace) {
       stroke(20 * i, 200 - 20 * i, 255 * (float(i) / sines.length), alpha); // blue
       fill(0, 0, 255, alpha / 2); // also, um, blue
-      erad = 5.0 * (1.0 - float(i) / sines.length); // pen width will be related to which sine
+      erad = 5.0 * (1.0 - float(i)  / sines.length); // pen width will be related to which sine
     }
     let radius = rad / (i + 1); // radius for circle itself
     rotate(sines[i]); // rotate circle
@@ -93,7 +93,7 @@ function draw() {
   pop(); // pop down final transformation
 }
 
-function keyReleased() {
+window.keyReleased = function() {
   if (key === ' ') {
     trace = !trace;
     background(255);
