@@ -1,11 +1,10 @@
-let MAXSINES = 50  ; // how many of these things can we do at once?
-let sines = new Array(MAXSINES); // an array to hold all the current angles
+let MAX_SINES = 50  ; // how many of these things can we do at once?
+let sines = new Array(MAX_SINES); // an array to hold all the current angles
 let rad; // an initial radius value for the central sine
-let i; // a counter variable
 
 // play with these to get a sense of what's going on:
-//let fund = 0.005; // the speed of the central sine
-//let ratio = 1.0; // what multiplier for speed is each additional sine?
+
+//let ratio = 1.0;
 let alpha = 50; // how opaque is the tracing system
 
 let trace = false; // are we tracing?
@@ -17,16 +16,16 @@ let ratioSlider;
 function setup() {
   createCanvas(910, 500);
 
-  rad = height / 4; // comput  e radius for central circle
+  rad = height / 4; // compute radius for central circle
   background(204); // clear the screen
 
   textSize(12);
   noStroke();
-  fundSlider = createSlider(0, 1000, 100);
+  fundSlider = createSlider(0, 1000, 100); // the speed of the central sine
   fundSlider.position(10, 30);
   numSinesSlider = createSlider(1, 20, 2);
   numSinesSlider.position(10, 50);
-  ratioSlider = createSlider(0, 100, 0);
+  ratioSlider = createSlider(0, 100, 0); // what multiplier for speed is each additional sine?
   ratioSlider.position(10, 70);
 
   for (let i = 0; i<sines.length; i++) {
