@@ -12,7 +12,7 @@ export default function createSliders(p) {
     speedSlider: createSlider( 0, 1000, 100, 0),
     numSinesSlider: createSlider( 1, 20, 2, 1),
     speedRatioSlider: createSlider( 0, 100, 0, 2),
-    centralRadiusSlider: createSlider( 1, 200, 100, 3),
+    radScaleSlider: createSlider( 1, 200, 100, 3),
   };
 
   allSliders.drawSliderLabels = function() {
@@ -20,9 +20,8 @@ export default function createSliders(p) {
     p.text('speed',textX, getSliderY(0) + TEXT_Y_OFFSET);
     p.text('num Sines',textX, getSliderY(1) + TEXT_Y_OFFSET);
     p.text('speed ratio',textX, getSliderY(2) + TEXT_Y_OFFSET);
-    p.text('centrail rad',textX, getSliderY(3) + TEXT_Y_OFFSET);
+    p.text('radius scale',textX, getSliderY(3) + TEXT_Y_OFFSET);
   }
-
 
   function createSlider( minValue, maxValue, defaultValue, i) {
     const slider = p.createSlider(minValue, maxValue, defaultValue); // the speed of the central sine
@@ -33,7 +32,6 @@ export default function createSliders(p) {
 
   return allSliders;
 }
-
 
 
 function getSliderY(i) {

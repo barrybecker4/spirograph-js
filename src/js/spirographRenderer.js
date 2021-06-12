@@ -5,28 +5,28 @@ export default {
   render,
 }
 
-function render(p, sines, rad, fund, numSines, ratio, centralRadScale, trace) {
+function render(p, sines, params) {
 
   p.push(); // start a transformation matrix
   p.translate(p.width / 2, p.height / 2); // move to middle of screen
 
-  for (let i = 0; i < numSines; i++) {
+  for (let i = 0; i < params.numSines; i++) {
     let erad = 0; // radius for small "point" within circle... this is the 'pen' when tracing
     // setup for tracing
-    if (trace) {
+    if (params.trace) {
       p.stroke(20 * i, 200 - 20 * i, 255 * (p.float(i) / sines.length), alpha);
       p.fill(0, 0, 255, alpha / 2);
       erad = 5.0 * (1.0 - p.float(i)  / sines.length); // pen width will be related to which sine
     }
-    let radius = centralRadScale * rad / (i + 1); // radius for circle itself
+    let radius = params.radScale * params.rad / (i + 1); // radius for circle itself
     p.rotate(sines[i]); // rotate circle
-    if (!trace) p.ellipse(0, 0, radius * 2, radius * 2); // if we're simulating, draw the sine
+    if (!params.trace) p.ellipse(0, 0, radius * 2, radius * 2); // if we're simulating, draw the sine
 
-    drawDot(p, radius, erad, trace);
+    drawDot(p, radius, erad, params.trace);
 
     p.translate(0, radius); // move into position for next sine
     // update angle based on fundamental
-    sines[i] = (sines[i] + (fund + (fund * i * ratio))) % p.TWO_PI;
+    sines[i] = (sines[i] + (params.speed + (params.speed * i * params.ratio))) % p.TWO_PI;
   }
 
   p.pop(); // pop down final transformation

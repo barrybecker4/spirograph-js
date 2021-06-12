@@ -41,12 +41,16 @@ const sketch = p => {
       oldTrace = trace;
     }
 
-    const fund = controls.speedSlider.value() / 20000;
-    const numSines = controls.numSinesSlider.value();
-    const ratio = 1.0 + controls.speedRatioSlider.value() / 10;
-    const centralRadScale = controls.centralRadiusSlider.value() / 100;
+    const params = {
+      rad,
+      trace,
+      speed: controls.speedSlider.value() / 20000,
+      numSines: controls.numSinesSlider.value(),
+      ratio:  1.0 + controls.speedRatioSlider.value() / 10,
+      radScale: controls.radScaleSlider.value() / 100,
+    }
 
-    spirographRenderer.render(p, sines, rad, fund, numSines, ratio, centralRadScale, trace);
+    spirographRenderer.render(p, sines, params);
   }
 
   p.keyReleased = function() {
