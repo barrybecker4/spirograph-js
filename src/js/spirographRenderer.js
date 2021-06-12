@@ -5,7 +5,7 @@ export default {
   render,
 }
 
-function render(p, sines, rad, fund, numSines, ratio, trace) {
+function render(p, sines, rad, fund, numSines, ratio, centralRadScale, trace) {
 
   p.push(); // start a transformation matrix
   p.translate(p.width / 2, p.height / 2); // move to middle of screen
@@ -18,7 +18,7 @@ function render(p, sines, rad, fund, numSines, ratio, trace) {
       p.fill(0, 0, 255, alpha / 2);
       erad = 5.0 * (1.0 - p.float(i)  / sines.length); // pen width will be related to which sine
     }
-    let radius = rad / (i + 1); // radius for circle itself
+    let radius = centralRadScale * rad / (i + 1); // radius for circle itself
     p.rotate(sines[i]); // rotate circle
     if (!trace) p.ellipse(0, 0, radius * 2, radius * 2); // if we're simulating, draw the sine
 
