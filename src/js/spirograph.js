@@ -2,35 +2,46 @@ let MAX_SINES = 50  ; // how many of these things can we do at once?
 let sines = new Array(MAX_SINES); // an array to hold all the current angles
 let rad; // an initial radius value for the central sine
 
-// play with these to get a sense of what's going on:
+const SLIDER_MARGIN = 10;
+const SLIDER_WIDTH = 150;
 
-//let ratio = 1.0;
+
 let alpha = 50; // how opaque is the tracing system
 
 let trace = false; // are we tracing?
+let oldTrace = !trace;
 
 let fundSlider;
 let numSinesSlider;
 let ratioSlider;
 
 function setup() {
-  createCanvas(910, 500);
+  createCanvas(100, 100);
+  windowResized();
 
-  rad = height / 4; // compute radius for central circle
   background(204); // clear the screen
 
-  textSize(12);
+  textSize(14);
   noStroke();
   fundSlider = createSlider(0, 1000, 100); // the speed of the central sine
-  fundSlider.position(10, 30);
+  fundSlider.position(SLIDER_MARGIN, 30);
+  fundSlider.style('width', SLIDER_WIDTH + 'px');
   numSinesSlider = createSlider(1, 20, 2);
-  numSinesSlider.position(10, 50);
+  numSinesSlider.position(SLIDER_MARGIN, 50);
+  numSinesSlider.style('width', SLIDER_WIDTH + 'px');
   ratioSlider = createSlider(0, 100, 0); // what multiplier for speed is each additional sine?
-  ratioSlider.position(10, 70);
+  ratioSlider.position(SLIDER_MARGIN, 70);
+  ratioSlider.style('width', SLIDER_WIDTH + 'px');
 
   for (let i = 0; i<sines.length; i++) {
     sines[i] = PI; // start EVERYBODY facing NORTH
   }
+
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth - 30, windowHeight - 40);
+  rad = height / 4; // compute radius for central circle
 }
 
 function draw() {
@@ -41,14 +52,18 @@ function draw() {
   //console.log(r="ratio=" + ratio);
 
   if (!trace) {
-    background(204); // clear screen if showing geometry
     stroke(0, 255); // black pen
     noFill(); // don't fill
+    background(204); // clear screen if showing geometry
+  }
+  if (!trace || trace != oldTrace) {
+    const textX = 2 * SLIDER_MARGIN + SLIDER_WIDTH;
+    text('fund',textX, 18);
+    text('numSines',textX, 37);
+    text('ratio',textX, 58);
+    oldTrace = trace;
   }
 
-  text('fund', fundSlider.x * 2 + fundSlider.width, 18);
-  text('numSines', numSinesSlider.x * 2 + numSinesSlider.width, 37);
-  text('ratio', ratioSlider.x * 2 + ratioSlider.width, 58);
 
   // MAIN ACTION
   push(); // start a transformation matrix
