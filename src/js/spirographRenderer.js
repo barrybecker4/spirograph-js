@@ -1,5 +1,5 @@
 
-const alpha = 50; // how opaque is the tracing system
+const alpha = 100; // how opaque is the tracing system
 
 export default {
   render,
@@ -14,11 +14,12 @@ function render(p, sines, params) {
     let erad = 0; // radius for small "point" within circle... this is the 'pen' when tracing
     // setup for tracing
     if (params.trace) {
-      p.stroke(20 * i, 200 - 20 * i, 255 * (p.float(i) / sines.length), alpha);
+      p.stroke(20 * i, 200 - 20 * i, 255 * (p.float(i) / params.numSines), alpha);
       p.fill(0, 0, 255, alpha / 2);
-      erad = 5.0 * (1.0 - p.float(i)  / sines.length); // pen width will be related to which sine
+      erad = 5.0 * (1.0 - p.float(i) / params.numSines); // pen width will be related to which sine
+      p.strokeWeight(erad); // Make the points 10 pixels in
     }
-    let radius = params.radScale * params.rad / (i + 1); // radius for circle itself
+    let radius = params.radScale * params.rad / (i * params.radRatio + 1); // radius for circle itself
     p.rotate(sines[i]); // rotate circle
     if (!params.trace) p.ellipse(0, 0, radius * 2, radius * 2); // if we're simulating, draw the sine
 
@@ -38,6 +39,18 @@ function drawDot(p, radius, erad, trace) {
 
   if (trace) p.ellipse(0, 0, erad, erad); // draw with erad if tracing
   else p.ellipse(0, 0, 5, 5); // draw a little circle
+
+  p.pop(); // go down one level
+}
+
+function drawArc(p, radius, erad, trace) {
+  p.push(); // go up one level
+  p.translate(0, radius); // move to sine edge
+
+  p.point(0, 0);
+
+  //if (trace) p.ellipse(0, 0, erad, erad); // draw with erad if tracing
+  //else p.ellipse(0, 0, 5, 5); // draw a little circle
 
   p.pop(); // go down one level
 }

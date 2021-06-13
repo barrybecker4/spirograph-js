@@ -41,6 +41,10 @@ const sketch = p => {
       oldTrace = trace;
     }
 
+    // add slider for radMin, radMax, radNumPoints
+    // add toggle for show lines
+    // make points smaller on outer circles
+    // toggle for middle circle
     const params = {
       rad,
       trace,
@@ -48,6 +52,7 @@ const sketch = p => {
       numSines: controls.numSinesSlider.value(),
       ratio:  1.0 + controls.speedRatioSlider.value() / 10,
       radScale: controls.radScaleSlider.value() / 100,
+      radRatio: controls.radRatioSlider.value() / 100,
     }
 
     spirographRenderer.render(p, sines, params);
