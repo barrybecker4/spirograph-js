@@ -17,7 +17,7 @@ const TEXT_Y_OFFSET = 8;
 export default function createSliders(p) {
 
   const allSliders = {
-    frameRateSlider: createSlider(1, 80, 10, 0),
+    frameRateSlider: createSlider(1, 80, 80, 0),
     speedSlider: createSlider( 0, 1000, 100, 1),
     numSinesSlider: createSlider( 1, 20, 2, 2),
     speedRatioSlider: createSlider( 0, 100, 0, 3),

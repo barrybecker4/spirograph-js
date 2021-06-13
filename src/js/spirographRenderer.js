@@ -1,5 +1,5 @@
 
-const alpha = 100; // how opaque is the tracing system
+const alpha = 70; // how opaque is the tracing system
 
 export default {
   render,
@@ -14,7 +14,8 @@ function render(p, sines, params) {
     let erad = 0; // radius for small "point" within circle... this is the 'pen' when tracing
     // setup for tracing
     if (params.trace) {
-      p.stroke(20 * i, 200 - 20 * i, 255 * (p.float(i) / params.numSines), alpha);
+      const colorNum = 250 * (p.float(i) / params.numSines);
+      p.stroke(250 - colorNum, (120 + colorNum) % 255, colorNum, alpha);
       //p.fill(0, 0, 255, alpha / 2);
       erad = 5.0 * (1.0 - p.float(i) / params.numSines); // pen width will be related to which sine
       p.strokeWeight(erad); // Make the points 10 pixels in
@@ -45,7 +46,8 @@ function drawDot(p, radius, erad, params) {
     const inc = numSamples == 1 ? startRad : delta / (numSamples - 1);
     for (let i = 0; i < numSamples; i++) {
       p.translate(0, inc); // move to sine edge
-      p.ellipse(0, 0, erad, erad);
+      //p.ellipse(0, 0, erad, erad);
+      p.point(0, 0);
     }
   } // draw with erad if tracing
   else {
