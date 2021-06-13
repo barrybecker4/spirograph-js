@@ -28,11 +28,11 @@ export default function createSliders(p) {
     p.fill(255, 255, 255, 255);
     p.rect(0, 0, 2 * SLIDER_MARGIN + SLIDER_WIDTH + 120, 2 * SLIDER_MARGIN + 6 * SLIDER_HEIGHT);
     p.noFill();
-    p.text('frame rate ' + Math.round(p.frameRate()), textX , getSliderY(0) + TEXT_Y_OFFSET);
-    p.text('speed ' + allSliders.speedSlider.value(), textX , getSliderY(1) + TEXT_Y_OFFSET);
-    p.text('num Sines', textX, getSliderY(2) + TEXT_Y_OFFSET);
-    p.text('speed ratio', textX, getSliderY(3) + TEXT_Y_OFFSET);
-    p.text('radius scale', textX, getSliderY(4) + TEXT_Y_OFFSET);
+    p.text(`frame rate (${Math.round(p.frameRate())})`, textX , getSliderY(0) + TEXT_Y_OFFSET);
+    p.text(`speed (${allSliders.speedSlider.value()})`, textX , getSliderY(1) + TEXT_Y_OFFSET);
+    p.text(`num Sines (${allSliders.numSinesSlider.value()})`, textX, getSliderY(2) + TEXT_Y_OFFSET);
+    p.text(`speed ratio (${allSliders.speedRatioSlider.value()})`, textX, getSliderY(3) + TEXT_Y_OFFSET);
+    p.text(`radius scale (${allSliders.radScaleSlider.value()})`, textX, getSliderY(4) + TEXT_Y_OFFSET);
     p.text('radius ratio', textX, getSliderY(5) + TEXT_Y_OFFSET);
   }
 

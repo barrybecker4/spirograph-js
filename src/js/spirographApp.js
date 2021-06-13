@@ -45,8 +45,7 @@ const sketch = p => {
     }
 
     // add slider for radMin, radMax, radNumPoints
-    // add toggle for show lines
-    // make points smaller on outer circles
+    // add toggle for show lines - draw lines as arc?
     // toggle for middle circle
     const params = {
       rad,
