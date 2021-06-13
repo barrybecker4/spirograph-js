@@ -23,7 +23,7 @@ function render(p, sines, params) {
     p.rotate(sines[i]); // rotate circle
     if (!params.trace) p.ellipse(0, 0, radius * 2, radius * 2); // if we're simulating, draw the sine
 
-    drawDot(p, radius, erad, params.trace);
+    drawDot(p, radius, erad, params);
 
     p.translate(0, radius); // move into position for next sine
     // update angle based on fundamental
@@ -33,12 +33,24 @@ function render(p, sines, params) {
   p.pop(); // pop down final transformation
 }
 
-function drawDot(p, radius, erad, trace) {
+function drawDot(p, radius, erad, params) {
   p.push(); // go up one level
-  p.translate(0, radius); // move to sine edge
 
-  if (trace) p.ellipse(0, 0, erad, erad); // draw with erad if tracing
-  else p.ellipse(0, 0, 5, 5); // draw a little circle
+  if (params.trace) {
+    const startRad = radius + params.radOffsetMin * radius;
+    const stopRad = radius + params.radOffsetMax * radius;
+    const delta = stopRad - startRad;
+    const numSamples = params.radOffsetSamples;
+    const inc = numSamples == 1 ? startRad : delta / (numSamples - 1);
+    for (let i = 0; i < numSamples; i++) {
+      p.translate(0, inc); // move to sine edge
+      p.ellipse(0, 0, erad, erad);
+    }
+  } // draw with erad if tracing
+  else {
+    p.translate(0, radius); // move to sine edge
+    p.ellipse(0, 0, 5, 5);
+  } // draw a little circle
 
   p.pop(); // go down one level
 }

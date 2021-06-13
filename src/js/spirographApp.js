@@ -45,6 +45,7 @@ const sketch = p => {
     }
 
     // add slider for radMin, radMax, radNumPoints
+    // slider for color
     // add toggle for show lines - draw lines as arc?
     // toggle for middle circle
     const params = {
@@ -55,6 +56,10 @@ const sketch = p => {
       ratio:  1.0 + controls.speedRatioSlider.value() / 10,
       radScale: controls.radScaleSlider.value() / 100,
       radRatio: controls.radRatioSlider.value() / 100,
+
+      radOffsetMin: controls.radOffsetMinSlider.value() / 100,
+      radOffsetMax: controls.radOffsetMaxSlider.value() / 100,
+      radOffsetSamples: controls.radOffsetSamplesSlider.value(),
     }
 
     spirographRenderer.render(p, sines, params);
