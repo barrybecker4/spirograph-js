@@ -7,7 +7,7 @@ const UI_PANEL_Y = 30;
 const TEXT_Y_OFFSET = -12;
 
 // Todo:
-// checkboxs for
+// checkboxes for
 // - show center circle
 // - draw lines (possible?)
 // - trace or not
@@ -15,20 +15,25 @@ const TEXT_Y_OFFSET = -12;
 export default function createSliders(p) {
 
   const allSliders = {
-    speedSlider: createSlider( 0, 1000, 100, 0),
-    numSinesSlider: createSlider( 1, 20, 2, 1),
-    speedRatioSlider: createSlider( 0, 100, 0, 2),
-    radScaleSlider: createSlider( 1, 200, 100, 3),
-    radRatioSlider: createSlider( 2, 300, 100, 4),
+    frameRateSlider: createSlider(1, 80, 10, 0),
+    speedSlider: createSlider( 0, 1000, 100, 1),
+    numSinesSlider: createSlider( 1, 20, 2, 2),
+    speedRatioSlider: createSlider( 0, 100, 0, 3),
+    radScaleSlider: createSlider( 1, 150, 50, 4),
+    radRatioSlider: createSlider( 5, 500, 100, 5),
   };
 
   allSliders.drawSliderLabels = function() {
     const textX = 2 * SLIDER_MARGIN + SLIDER_WIDTH;
-    p.text('speed', textX, getSliderY(0) + TEXT_Y_OFFSET);
-    p.text('num Sines', textX, getSliderY(1) + TEXT_Y_OFFSET);
-    p.text('speed ratio', textX, getSliderY(2) + TEXT_Y_OFFSET);
-    p.text('radius scale', textX, getSliderY(3) + TEXT_Y_OFFSET);
-    p.text('radius ratio', textX, getSliderY(4) + TEXT_Y_OFFSET);
+    p.fill(255, 255, 255, 255);
+    p.rect(0, 0, 2 * SLIDER_MARGIN + SLIDER_WIDTH + 120, 2 * SLIDER_MARGIN + 6 * SLIDER_HEIGHT);
+    p.noFill();
+    p.text('frame rate ' + Math.round(p.frameRate()), textX , getSliderY(0) + TEXT_Y_OFFSET);
+    p.text('speed ' + allSliders.speedSlider.value(), textX , getSliderY(1) + TEXT_Y_OFFSET);
+    p.text('num Sines', textX, getSliderY(2) + TEXT_Y_OFFSET);
+    p.text('speed ratio', textX, getSliderY(3) + TEXT_Y_OFFSET);
+    p.text('radius scale', textX, getSliderY(4) + TEXT_Y_OFFSET);
+    p.text('radius ratio', textX, getSliderY(5) + TEXT_Y_OFFSET);
   }
 
   function createSlider( minValue, maxValue, defaultValue, i) {

@@ -4,16 +4,16 @@ import spirographRenderer from './spirographRenderer.js';
 const sketch = p => {
   let MAX_SINES = 50  ; // how many of these things can we do at once?
   let sines = new Array(MAX_SINES); // an array to hold all the current angles
+
   let rad; // an initial radius value for the central sine
   const controls = createControls(p);
 
   let trace = false; // are we tracing?
-  let oldTrace = !trace;
+  let oldFrameRate = 0;
 
   p.setup = function() {
     p.createCanvas(100, 100);
     p.windowResized();
-
     p.background(204); // clear the screen
 
     p.textSize(14);
@@ -36,9 +36,12 @@ const sketch = p => {
       p.noFill(); // don't fill
       p.background(204); // clear screen if showing geometry
     }
-    if (!trace || trace != oldTrace) {
-      controls.drawSliderLabels();
-      oldTrace = trace;
+    controls.drawSliderLabels();
+
+    const fr = controls.frameRateSlider.value();
+    if (fr != oldFrameRate) {
+      p.frameRate(fr);
+      oldFrameRate = fr;
     }
 
     // add slider for radMin, radMax, radNumPoints

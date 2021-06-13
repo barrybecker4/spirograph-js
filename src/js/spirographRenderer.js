@@ -15,7 +15,7 @@ function render(p, sines, params) {
     // setup for tracing
     if (params.trace) {
       p.stroke(20 * i, 200 - 20 * i, 255 * (p.float(i) / params.numSines), alpha);
-      p.fill(0, 0, 255, alpha / 2);
+      //p.fill(0, 0, 255, alpha / 2);
       erad = 5.0 * (1.0 - p.float(i) / params.numSines); // pen width will be related to which sine
       p.strokeWeight(erad); // Make the points 10 pixels in
     }
@@ -43,14 +43,7 @@ function drawDot(p, radius, erad, trace) {
   p.pop(); // go down one level
 }
 
-function drawArc(p, radius, erad, trace) {
-  p.push(); // go up one level
-  p.translate(0, radius); // move to sine edge
-
-  p.point(0, 0);
-
-  //if (trace) p.ellipse(0, 0, erad, erad); // draw with erad if tracing
-  //else p.ellipse(0, 0, 5, 5); // draw a little circle
-
-  p.pop(); // go down one level
+function drawArc(p, radius, sinValue, erad) {
+  const v = sinValue; // + p.PI / 2;
+  p.arc(0, 0, radius, radius, v - 0.2, v + 0.2);
 }
