@@ -23,7 +23,8 @@ function render(p, sines, params) {
     p.rotate(sines[i]); // rotate circle
     if (!params.trace) p.ellipse(0, 0, radius * 2, radius * 2); // if we're simulating, draw the sine
 
-    drawDot(p, radius, erad, params);
+    if (!(!params.showBaseCircle && i === 0 ))
+      drawDot(p, radius, erad, params);
 
     p.translate(0, radius); // move into position for next sine
     // update angle based on fundamental
